@@ -1,21 +1,19 @@
 pipeline{
     agent any
     stages{
-        stage('Build'){
+            stage('Install Dependencies'){
             steps{
-                echo 'Building Stage'
-                sh 'ls -la'
+                sh 'pip install pytest'
             }
         }
-        stage('Test'){
+        stage('Run Tests'){
             steps{
-                echo 'Testing Stage'
+                sh 'pytest --junitxml=report.xml'
             }
         }
-        stage('Deploy'){
-            steps{
-                echo 'Deploying'
+    post{
+    always{
+            junit 'report.xml'
             }
-        }
     }
 }
