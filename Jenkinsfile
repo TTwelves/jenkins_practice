@@ -3,6 +3,7 @@ pipeline{
     stages{
             stage('Install Dependencies'){
             steps{
+            echo 'Installing Dependencies'
                 sh 'pip install pytest'
             }
         }
